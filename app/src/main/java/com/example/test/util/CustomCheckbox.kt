@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.test.ui.theme.lila
 
 @Composable
-fun CustomCheckbox() {
+fun CustomCheckbox(onCheck:(Boolean) -> Unit = {}) {
     var checked by remember { mutableStateOf(false) }
 
     Row(
@@ -26,7 +26,10 @@ fun CustomCheckbox() {
         ) {
             Checkbox(
                 checked = checked,
-                onCheckedChange = { checked = it },
+                onCheckedChange = {
+                    checked = it
+                    onCheck(it)
+                                  },
                 colors = CheckboxDefaults.colors(
                     checkedColor = lila,
                     uncheckedColor = Color.Gray

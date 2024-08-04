@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
+import com.example.test.navegation.Navegation
 import com.example.test.screen.Register
 import com.example.test.screen.ViewModelValidation
 
@@ -14,9 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Column {
-                Register(ViewModelValidation())
-            }
+                Navegation()
         }
     }
 }
