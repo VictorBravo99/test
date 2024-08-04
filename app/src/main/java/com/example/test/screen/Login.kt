@@ -45,14 +45,14 @@ fun Login(){
             imageVector = Icons.Default.Email,
             placeholder = "Ingresar correo electrónico",
             keyboardType = KeyboardType.Email
-        )
+        ){}
 
         CustomInput(
             title = "Contraseña",
             imageVector = Icons.Default.Lock,
             placeholder = "abcABC#123",
             keyboardType = KeyboardType.Password
-        )
+        ){}
         Row (
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,

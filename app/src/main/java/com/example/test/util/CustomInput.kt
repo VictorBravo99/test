@@ -17,9 +17,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
@@ -27,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,11 +44,14 @@ fun CustomInput(
     imageVector: ImageVector = Icons.Default.Email,
     placeholder: String = stringResource(R.string.label_mail),
     keyboardType: KeyboardType = KeyboardType.Password,
+    messageError: String? = null,
+    value: (String)->Unit ={},
 ) {
     var isGone by remember { mutableStateOf(keyboardType == KeyboardType.Password) }
 
     var input by remember { mutableStateOf("") }
-    Column {
+    Column(modifier = Modifier
+        .padding(bottom = 20.dp)) {
 
         Text(
             modifier = Modifier.padding(bottom = 2.dp),
@@ -55,7 +61,6 @@ fun CustomInput(
 
         TextField(
             modifier = Modifier
-                .padding(bottom = 20.dp)
                 .fillMaxWidth()
                 .height(60.dp),
             colors = TextFieldDefaults.colors().copy(
@@ -67,10 +72,13 @@ fun CustomInput(
                 focusedIndicatorColor = lila,
             ),
             value = input,
+            isError = messageError?.isNotBlank() ?: false,
             visualTransformation =
             if (isGone) PasswordVisualTransformation()
             else VisualTransformation.None,
-            onValueChange = { input = it },
+            onValueChange = {
+                input = it
+                value(it)   },
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
             ),
@@ -113,5 +121,14 @@ fun CustomInput(
             },
             placeholder = { Text(placeholder) },
         )
+
+        if (messageError != null) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = messageError,
+                color = Color.Red,
+                textAlign = TextAlign.End
+            )
+        }
     }
 }

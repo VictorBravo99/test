@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.test.ui.theme.lila
 
 @Composable
-fun CustomButton(onClick: () -> Unit = {}, text: String = "Test") {
+fun CustomButton(text: String = "Test", onClick: () -> Unit = {}) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(

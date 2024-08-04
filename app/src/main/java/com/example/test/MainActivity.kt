@@ -5,9 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Checkbox
-import com.example.test.screen.Login
 import com.example.test.screen.Register
+import com.example.test.screen.ViewModelValidation
 
 
 class MainActivity : ComponentActivity() {
@@ -16,8 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Column {
-                Register()
-
+                Register(ViewModelValidation())
             }
         }
     }
